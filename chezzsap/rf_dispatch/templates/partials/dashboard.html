@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Warehouse Dashboard</h1>
+    <ul>
+        <li>Total Warehouses: {{ total_warehouses }}</li>
+        <li>Total Products: {{ total_products }}</li>
+        <li>Total Inventory Items: {{ total_inventory_items }}</li>
+        <li>Pending Inbound Orders: {{ pending_inbound }}</li>
+        <li>Pending Outbound Orders: {{ pending_outbound }}</li>
+    </ul>
+</div>
+{% endblock %}

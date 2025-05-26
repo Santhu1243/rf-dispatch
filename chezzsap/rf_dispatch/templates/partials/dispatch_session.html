@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Dispatch Session - {{ session.outbound_order.order_number }}{% endblock %}
+
+{% block content %}
+<h2>Dispatch Session: {{ session.outbound_order.order_number }}</h2>
+<p>Dock Door: {{ session.dock_door }}</p>
+<p>Scanned: {{ scanned_count }} of {{ total_count }}</p>
+
+<form method="post" action="{% url 'scan_hu' session.id %}">
+    {% csrf_token %}
+    <input type="text" name="hu_code" placeholder="Scan HU Barcode" autofocus>
+    <button type="submit">Scan</button>
+</form>
+
+<form method="post" action="{% url 'complete_dispatch' session.id %}">
+    {% csrf_token %}
+    <button type="submit">Complete Dispatch</button>
+</form>
+
+<h3>Handling Units</h3>
+<table>
+    <thead>
+        <tr>
+            <th>HU Code</th>
+            <th>Status</th>
+            <th>Scanned At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hu in hus %}
+        <tr>
+            <td>{{ hu.hu_code }}</td>
+            <td>{% if hu.is_scanned %}✅{% else %}❌{% endif %}</td>
+            <td>{{ hu.scanned_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if session.outbound_order %}
+<p>
+    <strong>Outbound Order Details:</strong><br>
+    Order Number: {{ session.outbound_order.order_number }}<br>
+    Customer: {{ session.outbound_order.customer_name }}<br>
+    Status: {{ session.outbound_order.status }}<br>
+    Created At: {{ session.outbound_order.created_at }}<br>
+</p>
+{% endif %}
+
+<p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+{% endblock %}
