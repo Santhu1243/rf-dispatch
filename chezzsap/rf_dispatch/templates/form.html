@@ -1,0 +1,31 @@
+{% comment %} List Template (list.html) {% endcomment %}
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ model_name }} List</h2>
+
+{# For the "Create New" URL, you must pass the URL name directly from the view or build it in the view #}
+<a class="btn btn-success mb-3" href="{% url create_url_name %}">Create New</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            {% for field in fields %}
+            <th>{{ field.verbose_name|capfirst }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            {% for field in fields %}
+            <td>{{ object|attr:field.name }}</td>
+            {% endfor %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="{{ fields|length }}">No records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

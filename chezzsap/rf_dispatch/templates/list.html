@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block content %}
+<h2>{{ model_name }} List</h2>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            {% for field in fields %}
+            <th>{{ field.verbose_name|capfirst }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            {% for field in fields %}
+            <td>{{ object|getattr:field.name }}</td>
+            {% endfor %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="{{ fields|length }}">No records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

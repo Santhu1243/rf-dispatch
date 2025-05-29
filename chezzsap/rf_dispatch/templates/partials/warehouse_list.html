@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Warehouse List{% endblock %}
+{% block content %}
+<h2>Warehouses</h2>
+<a href="{% url 'warehouse-create' %}">+ Add New Warehouse</a>
+<ul>
+    {% for warehouse in object_list %}
+    <li>{{ warehouse.name }} - {{ warehouse.location }}</li>
+    {% empty %}
+    <li>No warehouses found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

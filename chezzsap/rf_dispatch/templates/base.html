@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <title>RF Dispatch</title>
+    {% load custom_filters %}
+
+    <title>{% block title %}RF Dispatch{% endblock %}</title>
+
+    <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
@@ -24,9 +28,30 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'warehouse-list' %}">Warehouses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'product-list' %}">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inbound-list' %}">Inbound Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'outbound-list' %}">Outbound Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory-list' %}">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'movement-list' %}">Stock Movement</a>
                         </li>
                     </ul>
                 </div>
@@ -34,10 +59,12 @@
         </nav>
     </header>
 
-    {% block content %}
-    {% endblock %}
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    <!-- JS files -->
+    <!-- JS Files -->
     <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>

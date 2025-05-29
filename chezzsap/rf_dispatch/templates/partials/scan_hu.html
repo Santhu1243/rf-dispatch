@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Scan Handling Unit{% endblock %}
+{% block content %}
+<h2>Scan Handling Unit for Dispatch #{{ dispatch_session.id }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="hu_code">HU Code:</label>
+    <input type="text" name="hu_code" required>
+    <button type="submit">Scan</button>
+</form>
+{% endblock %}

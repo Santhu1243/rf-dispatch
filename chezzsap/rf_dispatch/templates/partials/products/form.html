@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form.instance.pk|yesno:"Edit Product,Create Product" }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+    <h2>{{ form.instance.pk|yesno:"Edit Product,Create Product" }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-responsive">
+            {{ form.as_table }}
+        </table>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-secondary" href="{% url 'product-list' %}">Back to Product List</a>
+    </form>
+</div>
+{% endblock %}

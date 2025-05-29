@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %} <!-- Add this -->
+
+{% block title %}{{ model_name }} List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mt-5">{{ model_name }}</h2>
+
+    <table class="table table-striped mt-5">
+        <thead>
+            <tr>
+                {% for field in fields %}
+                <th>{{ field|capfirst }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+            <tr>
+                {% for field in fields %}
+                <td>{{ obj|get_attr:field }}</td>
+                {% endfor %}
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="{{ fields|length }}">No {{ model_name|lower }} available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'warehouse-create' %}">Add New {{ model_name|slice:":-1" }}</a>
+
+</div>
+
+
+{% endblock %}

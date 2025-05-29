@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Complete Dispatch{% endblock %}
+{% block content %}
+<h2>Complete Dispatch #{{ dispatch_session.id }}</h2>
+<p>Are you sure you want to complete this dispatch?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+</form>
+{% endblock %}
